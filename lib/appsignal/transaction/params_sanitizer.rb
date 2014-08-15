@@ -34,6 +34,7 @@ module Appsignal
         end
 
         def sanitize_hash_with_target(source_hash, target_hash)
+          target_hash = target_hash.reduce({}){ |hash,pair| hash[pair[0]] = pair[1]; hash } # force target_hash to be a "real" hash
           source_hash.each_pair do |key, value|
             target_hash[key] = sanitize_value(value)
           end
